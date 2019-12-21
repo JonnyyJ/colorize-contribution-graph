@@ -53,7 +53,21 @@ function colorizeLegend(mainColor, originalColors, legendItems)
 
 function colorizeDays(mainColor, originalColors)
 {
+    let days = Array.from(document.getElementsByClassName('day'))
 
+    const dayGroups = {
+      0: days.filter( day => day.getAttribute('fill') == originalColors[0]),
+      1: days.filter( day => day.getAttribute('fill') == originalColors[1]),
+      2: days.filter( day => day.getAttribute('fill') == originalColors[2]),
+      3: days.filter( day => day.getAttribute('fill') == originalColors[3]),
+      4: days.filter( day => day.getAttribute('fill') == originalColors[4])
+    }
+  
+    dayGroups[0].forEach(day => day.setAttribute('fill', originalColors[0]))
+    dayGroups[1].forEach(day => day.setAttribute('fill', colorLuminance(mainColor, 0.9)))
+    dayGroups[2].forEach(day => day.setAttribute('fill', colorLuminance(mainColor, 0.75)))
+    dayGroups[3].forEach(day => day.setAttribute('fill', colorLuminance(mainColor, 0.5)))
+    dayGroups[4].forEach(day => day.setAttribute('fill', mainColor))
 }
 
 function colorLuminance(hex,lum)
